@@ -1,6 +1,6 @@
 /**
  *  @file   PseudorangeSwitchFactor.cpp
- *  @author Ryan
+ *  @author Ryan Watson and Jason Gross
  *  @brief  Implementation file for pseudorange switchable factor
  **/
 
