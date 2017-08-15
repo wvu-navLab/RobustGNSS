@@ -1,6 +1,6 @@
 /**
  *  @file   PseudorangeFactor.h
- *  @author Ryan
+ *  @author Ryan Watson and Jason Gross
  *  @brief  Header file for Pseudorange factor
  **/
 
