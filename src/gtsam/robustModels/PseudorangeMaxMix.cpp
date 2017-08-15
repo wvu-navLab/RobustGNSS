@@ -1,6 +1,6 @@
 /**
  *  @file   PseudorangeMaxMix.cpp
- *  @author Ryan
+ *  @author Ryan Watson
  *  @brief  Implementation file for pseudorange max-mix factor
  **/
 
