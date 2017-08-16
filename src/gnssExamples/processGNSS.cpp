@@ -1,6 +1,6 @@
 /**
     *  @file   processNovatel.cpp
-    *  @author Ryan
+    *  @author Ryan Watson
     *  @brief  Factor graph to process GNSS data. Currenlty only Pseudorange
 
     Current states estimated ::
