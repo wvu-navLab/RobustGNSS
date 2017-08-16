@@ -1,6 +1,6 @@
 /**
     *  @file   maxMixExample.cpp
-    *  @author Ryan
+    *  @author Ryan Watson
     *  @brief  Simple implementaion of the max-mixture pseudorange factor. 
 
     * how to run ::
