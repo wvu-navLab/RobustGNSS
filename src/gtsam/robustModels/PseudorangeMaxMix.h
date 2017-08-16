@@ -1,6 +1,6 @@
 /**
  *  @file   PseudorangeMaxMix.h
- *  @author Ryan
+ *  @author Ryan Watson
  *  @brief  Header file for Pseudorange Max-Mix factor
  *  REF :: @INPROCEEDINGS{Olson-RSS-12,
            AUTHOR    = {Edwin Olson AND Pratik Agarwal},
