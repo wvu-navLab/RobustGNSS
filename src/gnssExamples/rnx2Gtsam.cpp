@@ -1,6 +1,6 @@
 /*
     *  @file   rnxToGtsam.cpp
-    *  @author Ryan 
+    *  @author Ryan Watson
     *  @brief  Script to convert Rinex File format to format utilized by GTSAM. 
 
     * To do ::
