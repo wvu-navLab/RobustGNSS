@@ -1,6 +1,6 @@
 /**
     *  @file   switchFactorExample.cpp
-    *  @author Ryan
+    *  @author Ryan Watson and Jason Gross
     *  @brief  Simple implementaion of the switchable pseudorange factor. 
 
     * how to run ::
