@@ -1,6 +1,6 @@
 /**
  *  @file   GNSSPostfit.h
- *  @author Ryan
+ *  @author Ryan Watson
  *  @brief  Header file for GNSS postfit analysis
  **/
 

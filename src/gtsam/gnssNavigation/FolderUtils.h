@@ -1,6 +1,6 @@
 /**
  *  @file   FolderUtils.h
- *  @author Ryan
+ *  @author Ryan Watson
  *  @brief  Header file to allow for simple manipulation of directories.
  **/
 

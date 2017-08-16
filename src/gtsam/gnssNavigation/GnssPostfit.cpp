@@ -1,6 +1,6 @@
 /**
  *  @file   GNSSPostfit.cpp
- *  @author Ryan
+ *  @author Ryan Watson
  *  @brief  Implementation file for GNSS postfit analysis
 **/
 
