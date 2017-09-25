@@ -1,0 +1,10 @@
+/[Bb]uild*
+.idea
+*.pyc
+*.DS_Store
+[Tt]humbs.db
+/examples/Data*
+*.txt.user
+*.txt.user.6d59f0c
+/python-build/
+*.pydevproject

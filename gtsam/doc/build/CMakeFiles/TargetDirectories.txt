@@ -1,0 +1,4 @@
+/home/rmw/Documents/software/gtsam4/doc/build/CMakeFiles/edit_cache.dir
+/home/rmw/Documents/software/gtsam4/doc/build/CMakeFiles/doc_clean.dir
+/home/rmw/Documents/software/gtsam4/doc/build/CMakeFiles/rebuild_cache.dir
+/home/rmw/Documents/software/gtsam4/doc/build/CMakeFiles/doc.dir
