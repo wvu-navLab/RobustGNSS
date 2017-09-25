@@ -45,7 +45,7 @@ cd RobustGNSS/gtsam/build
 Next, the RINEX file saved in the __RobustGNSS/gtsam/gnssData__ directory must be converted to a format readable by GTSAM. ( It should be noted that GTSAM only looks for data files in the __RobustGNSS/gtsam/gnssData__ directory, so all new data files must be stored there.  ) 
 
 ```` 
-./gnssExamples/rnxToGtsam --obs dec12.16o --sp3 dec12.16o > ../gnssData/dec12.gtsam 
+./gnssExamples/rnx2Gtsam --obs dec12.16o --sp3 dec12.sp3 > ../gnssData/dec12.gtsam 
 ````
 
 Now, we can run the optimization script over the newly generated data file. 
