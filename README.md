@@ -62,6 +62,9 @@ cd test1;
 gnuplot 
 plot 'enu.sol' using 2:3 with points
 ````
+![fg error](https://lh3.googleusercontent.com/DnI5HJqO9Y6wzI4MMIp6Vx8gPyoSZphMc-5f1hD8U2kEZIS2jl1NoaZpWtxSwGO86PVa8E91nth6KDbZKpJN0Yc5yUMN_4JGSItvJRW3HAhO0RHGdseCkq5QaQ59PBE8LHWl-cjUz9RJse5T9upbfdin_yYyn_nCkBMJJj3r_2kTo_oTI1QsqSC8QZnfLACIwOO_vUBksVvYq3Bg6XhxkfIVVcXYB5f8gJFtRdO_405Bv-cge-BmoUwsq0pR-yx0JGAEnrR8aqVKEj9OFS5QwbLUTmat4R9G-DCzjBaCZQ_OJ3kGcJkprS0bCqRAc0b_iZpq7qgo-MFvS-qUfYcvN8c1QKLDlqvqPZXtxXkfRqbnEbjpTFfJX5B3ZH0O-FcFlV8YP0MboosaYrVom9P4NCLUpk-vR5BHCyZr9Oz0Bh93NhYuPw28zZQJh1iGmqYTBOX5XdUFUtnt1KGDqCGUYRlcSzLONmc8pa-9aA5L0Cvr10-IgipRrcGav890-a-HdrqU6ib3ua078lf0cWb55D50fgtad0RTXF89ypRPkhrRhwBbIrZzlbERWw2G6agyFItqJbAXPSd_nhaopAVZN0tYWtoaNYCWyl100H_5wSFmy_mdHUbiebpj19ab-IOMa66zfCyFpFkLdHN3oJgZYGkdRYopfxs6=w1280-h633-no)
+
+
 For a complete list of available options, run the command provided below.  
 
 ````
