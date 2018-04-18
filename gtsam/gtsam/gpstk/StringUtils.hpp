@@ -2774,7 +2774,3 @@ namespace gpstk
 
 } // namespace gpstk
 #endif // GPSTK_STRINGUTILS_HPP
-
-
-
-

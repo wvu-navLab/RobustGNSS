@@ -29,13 +29,13 @@ using namespace boost;
 
 namespace gtsam {
 
-  /// Function to calculate gnss postfit residuals
-	vector<double> getResiduals( Point3 &nomXYZ, Values &results, vector<rnxData> data);
+/// Function to calculate gnss postfit residuals
+vector<double> getResiduals( Point3 &nomXYZ, Values &results, vector<rnxData> data);
 
-	/// write residuals to text file
-	void writeResiduals( vector<double> postfitResiduals, string outputFile, vector<string> switchIndex );
+/// write residuals to text file
+void writeResiduals( vector<double> postfitResiduals, string outputFile, vector<string> switchIndex );
 
-	// iterate over residual vector to mark outliers.
-	vector<int> markResiduals( vector<double> postfitResdiuals, double threshold );
+// iterate over residual vector to mark outliers.
+vector<int> markResiduals( vector<double> postfitResdiuals, double threshold );
 
 }

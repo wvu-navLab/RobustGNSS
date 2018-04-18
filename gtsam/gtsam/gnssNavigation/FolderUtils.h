@@ -17,10 +17,10 @@ using namespace boost;
 
 namespace gtsam {
 
-    //// function to get current timestamp
-    string getTimestamp();
+//// function to get current timestamp
+string getTimestamp();
 
-    /// construct new directory
-    void makeDir( string dir );
+/// construct new directory
+void makeDir( string dir );
 
 }

@@ -27,7 +27,7 @@
 //  You should have received a copy of the GNU Lesser General Public
 //  License along with GPSTk; if not, write to the Free Software Foundation,
 //  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
-//  
+//
 //  Copyright 2004, The University of Texas at Austin
 //
 //============================================================================
@@ -35,22 +35,16 @@
 //============================================================================
 //
 //This software developed by Applied Research Laboratories at the University of
-//Texas at Austin, under contract to an agency or agencies within the U.S. 
+//Texas at Austin, under contract to an agency or agencies within the U.S.
 //Department of Defense. The U.S. Government retains all rights to use,
-//duplicate, distribute, disclose, or release this software. 
+//duplicate, distribute, disclose, or release this software.
 //
-//Pursuant to DoD Directive 523024 
+//Pursuant to DoD Directive 523024
 //
-// DISTRIBUTION STATEMENT A: This software has been approved for public 
+// DISTRIBUTION STATEMENT A: This software has been approved for public
 //                           release, distribution is unlimited.
 //
 //=============================================================================
-
-
-
-
-
-
 
 #include "getopt.h"
 
@@ -73,13 +67,13 @@ namespace gpstk
       /**
        * This class is part of a replacement for getopt.
        *
-       * Each CommandOption 
-       * represents an option you would enter at a command line.  You can 
-       * specify whether the option does or does not require an argument, 
-       * if the option is of a certain type (string or number), then the 
-       * short option (i.e. '-f') and long option ('--foo'), whether it's 
+       * Each CommandOption
+       * represents an option you would enter at a command line.  You can
+       * specify whether the option does or does not require an argument,
+       * if the option is of a certain type (string or number), then the
+       * short option (i.e. '-f') and long option ('--foo'), whether it's
        * a required option or not, then a short description for a help display.
-       * By default, options can appear an unlimited number of times on a 
+       * By default, options can appear an unlimited number of times on a
        * command line.  Use setMaxCount() to set a maximum limit to this.
        * In that case, additional appearances of that option will trigger
        * an error once parsed.
@@ -87,15 +81,15 @@ namespace gpstk
        * When a CommandOption is created (not using the default
        * constructor), it automatically adds itself to a list that will
        * be used by gpstk::CommandOptionParser. If you want to manage your
-       * own list, pass in your own std::vector<gpstk::CommandOptionParser> 
+       * own list, pass in your own std::vector<gpstk::CommandOptionParser>
        * with the CommandOption constructor. After parsing the command
-       * line, you can use the getValue() and 
-       * getCount() methods to see what arguments 
+       * line, you can use the getValue() and
+       * getCount() methods to see what arguments
        * the options had and how many times the option was listed on
        * the command line.
        *
        * This class is strongly connected to gpstk::CommandOptionParser, so
-       * if you change anything here, make sure you don't side affect 
+       * if you change anything here, make sure you don't side affect
        * the other.
        *
        * @sa getopttest.cpp in the test directory for some examples.
@@ -142,28 +136,28 @@ namespace gpstk
           * @param ot The type of option (string, number, any, etc.)
           * @param shOpt The one character command line option.  Set to 0
           * if unused.
-          * @param loOpt The long command option.  Set to std::string() 
+          * @param loOpt The long command option.  Set to std::string()
           * if unused.
           * @param desc A string describing what this option does.
           * @param req Set to true if this is a required option.
-          * @param optVectorList Use this to create your own 
+          * @param optVectorList Use this to create your own
           * command option list if you want to use an alternate method
           * of parsing the command options.
           */
-      CommandOption(const CommandOptionFlag of, 
+      CommandOption(const CommandOptionFlag of,
                     const CommandOptionType ot,
-                    const char shOpt, 
-                    const std::string& loOpt, 
+                    const char shOpt,
+                    const std::string& loOpt,
                     const std::string& desc,
                     const bool req = false,
-                    CommandOptionVec& optVectorList =  
+                    CommandOptionVec& optVectorList =
                        defaultCommandOptionList)
             : optFlag(of),  optType(ot),
               shortOpt(shOpt), longOpt(loOpt), description(desc),
               required(req), count(0), maxCount(0), order(0)
          {optVectorList.push_back(this);}
 
-         /// Sets the maximum number of times this should appear on the 
+         /// Sets the maximum number of times this should appear on the
          /// command line.
       CommandOption& setMaxCount(const unsigned long l)
          {maxCount = l; return *this;}
@@ -176,7 +170,7 @@ namespace gpstk
          /// (i.e.  "  -f, --foo=ARG")
       std::string getFullOptionString() const;
 
-         /// Returns a string with the argument format. 
+         /// Returns a string with the argument format.
       virtual std::string getArgString() const
       { return "ARG"; }
 
@@ -198,7 +192,7 @@ namespace gpstk
       std::vector<std::string> getValue() const { return value; }
 
          /// Returns the order which this command option was seen on the
-         /// command line, with 1 being the first option.  
+         /// command line, with 1 being the first option.
          //  If it can be repeated, this order represents the order of
          /// the last occurance of this option.
       unsigned int getOrder() const { return order; }
@@ -258,8 +252,8 @@ namespace gpstk
          /// Constructor
       RequiredOption(const CommandOptionFlag of,
                      const CommandOptionType ot,
-                     const char shOpt, 
-                     const std::string& loOpt, 
+                     const char shOpt,
+                     const std::string& loOpt,
                      const std::string& desc)
             : CommandOption(of, ot, shOpt, loOpt, desc, true)
          {}
@@ -277,13 +271,13 @@ namespace gpstk
    {
    public:
          /// Constructor
-      CommandOptionNoArg(const char shOpt, 
-                         const std::string& loOpt, 
+      CommandOptionNoArg(const char shOpt,
+                         const std::string& loOpt,
                          const std::string& desc,
                          const bool required = false)
             : CommandOption(noArgument, stdType, shOpt, loOpt, desc, required)
          {}
-         
+
          /// Destructor
       virtual ~CommandOptionNoArg() {}
          /// Returns true if this option was found on the command line
@@ -300,8 +294,8 @@ namespace gpstk
    public:
          /// Constructor
       CommandOptionWithArg(const CommandOptionType ot,
-                           const char shOpt, 
-                           const std::string& loOpt, 
+                           const char shOpt,
+                           const std::string& loOpt,
                            const std::string& desc,
                            const bool required = false)
             : CommandOption(hasArgument, ot, shOpt, loOpt, desc, required)
@@ -320,8 +314,8 @@ namespace gpstk
    {
    public:
          /// Constructor
-      CommandOptionWithAnyArg(const char shOpt, 
-                              const std::string& loOpt, 
+      CommandOptionWithAnyArg(const char shOpt,
+                              const std::string& loOpt,
                               const std::string& desc,
                               const bool required = false)
             : CommandOptionWithArg(stdType, shOpt, loOpt, desc, required)
@@ -340,8 +334,8 @@ namespace gpstk
    {
    public:
          /// Constructor
-      CommandOptionWithStringArg(const char shOpt, 
-                                 const std::string& loOpt, 
+      CommandOptionWithStringArg(const char shOpt,
+                                 const std::string& loOpt,
                                  const std::string& desc,
                                  const bool required = false)
             : CommandOptionWithArg(stdType, shOpt, loOpt, desc, required)
@@ -352,7 +346,7 @@ namespace gpstk
 
       virtual std::string checkArguments();
 
-         /// Returns a string with the argument format. 
+         /// Returns a string with the argument format.
       virtual std::string getArgString() const
       { return "<alpha>"; }
 
@@ -366,8 +360,8 @@ namespace gpstk
    {
    public:
          /// Constructor
-      CommandOptionWithNumberArg(const char shOpt, 
-                                 const std::string& loOpt, 
+      CommandOptionWithNumberArg(const char shOpt,
+                                 const std::string& loOpt,
                                  const std::string& desc,
                                  const bool required = false)
             : CommandOptionWithArg(stdType, shOpt, loOpt, desc, required)
@@ -378,7 +372,7 @@ namespace gpstk
 
       virtual std::string checkArguments();
 
-         /// Returns a string with the argument format. 
+         /// Returns a string with the argument format.
       virtual std::string getArgString() const
       { return "NUM"; }
 
@@ -393,7 +387,7 @@ namespace gpstk
        * that are not part of any other options.  e.g. "strace -ofile
        * command arg1 arg2". The "command arg1 arg2" part is placed in
        * objects of this class.
-       * 
+       *
        * @short CommandOption to take the rest of the command line
        */
    class CommandOptionRest : public CommandOptionWithArg
@@ -410,10 +404,10 @@ namespace gpstk
                         const bool required = false)
             : CommandOptionWithArg(trailingType, 0, "", desc, required)
       {}
-      
+
          /// Destructor
       virtual ~CommandOptionRest() {}
-      
+
       virtual std::string checkArguments();
 
    protected:
@@ -440,7 +434,7 @@ namespace gpstk
       CommandOptionOneOf()
             : CommandOption(noArgument, metaType, 0, "", "")
       {}
-      
+
          /// Destructor
       virtual ~CommandOptionOneOf() {}
 
@@ -452,7 +446,7 @@ namespace gpstk
 
          /// @return the command option that was used (NULL if none).
       CommandOption* whichOne() const;
-      
+
    protected:
       CommandOptionVec optionVec;
    };
@@ -475,7 +469,7 @@ namespace gpstk
           */
       CommandOptionAllOf()
       {}
-      
+
          /// Destructor
       virtual ~CommandOptionAllOf() {}
 
@@ -513,7 +507,7 @@ namespace gpstk
       CommandOptionMutex(const bool required = false)
             : doOneOfChecking(required)
       {}
-      
+
          /// Destructor
       virtual ~CommandOptionMutex() {}
 
@@ -580,7 +574,7 @@ namespace gpstk
           */
       CommandOptionGroupOr()
       {}
-      
+
          /// Destructor.
       virtual ~CommandOptionGroupOr() {}
 
@@ -612,7 +606,7 @@ namespace gpstk
           */
       CommandOptionGroupAnd()
       {}
-      
+
          /// Destructor.
       virtual ~CommandOptionGroupAnd() {}
 
@@ -621,6 +615,6 @@ namespace gpstk
    };
 
       //@}
-   
+
 } // namespace gpstk
 #endif

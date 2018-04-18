@@ -11,10 +11,12 @@ using namespace std;
 namespace gtsam {
 
 //***************************************************************************
-  Vector PseudorangeFactor::evaluateError(const gnssStateVec& q,
-                                   boost::optional<Matrix&> H) const {
-    if (H) { (*H) = (Matrix(1,5) << h_ ).finished(); }
-    double est = (h_.transpose() * q);
-    return (Vector(1) << est-measured_).finished();
-  }
+Vector PseudorangeFactor::evaluateError(const nonBiasStates& q,
+                                        boost::optional<Matrix&> H) const {
+
+        Vector h = obsMap(satXYZ_, nomXYZ_, 1);
+        if (H) { (*H) = (Matrix(1,5) << h ).finished(); }
+        double est = (h.transpose() * q);
+        return (Vector(1) << est - measured_ ).finished();
+}
 } // namespace
