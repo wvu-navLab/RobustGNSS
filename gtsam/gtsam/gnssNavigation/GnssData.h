@@ -21,6 +21,7 @@
 #include "boost/foreach.hpp"
 
 #include <cmath>
+#include <random>
 #include <fstream>
 #include <iostream>
 
@@ -35,6 +36,8 @@ namespace gtsam {
 /// Data = { Week, Sow, Epoch, SVN, SatXYZ, Rho, P.C., L.C., Break_Flag}
 typedef boost::tuple<double, int, int, Point3, double, double, double, int> rnxData;
 vector<rnxData> readGNSS(const std::string& fileLoc);
+
+vector<rnxData> readGNSSFaulty(const std::string& fileLoc, const double& mean, const double& stdDev, const double& percentFaulty);
 
 /// Write GNSS states to text file
 void writeStates(Values &results, string outputFile);

@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
         bool writeENU, writeECEF, writeBias, loose, tight, robust = false, first_ob = true;
         int currKey=-1, trop=1, startEpoch=0, satKeyPrev=-1, sc=1, nThreads, startKey;
         int num_gps_factors=0, factorCount=0, lastStep, firstStep, initIter;
-        double measWeight, switchInit, switchPrior, weight;
+        double measWeight, switchInit, switchPrior, weight, percentFaulty;
         double residualThresh, processScale(1.0), timeStep(0.1), prevTime;
         string gnssFile, outputFile, residualTxtInit="initResidaul.txt";
         string residualTxtOut="finalResidual.txt",textExtension=".txt", strategy;
@@ -96,6 +96,8 @@ int main(int argc, char** argv) {
                 ("threads", po::value<int>(&nThreads)->default_value(-1),
                 "Number of threads, or -1 to use all processors")
                 ("noTrop", "Will turn residual troposphere estimation off. Troposphere will still be modeled.")
+                ("percentFaulty", po::value<double>(&percentFaulty)->default_value(0.0),
+                "Percentage of observations to add faults. (scale [0,1])")
                 ("initIter",po::value<int>(&initIter)->default_value(100),
                 "Number of iterations before initial postfit data edit")
                 ("dir", po::value<string>(&dir)->default_value(""),
@@ -174,7 +176,9 @@ int main(int argc, char** argv) {
         noiseModel::Diagonal::shared_ptr nonBias_ProcessNoise = noiseModel::Diagonal::Sigmas((gtsam::Vector(5) << 3.0, 3.0, 3.0, 10, 1e-3).finished());
 
         // Read GNSS data
-        try { data = readGNSS(gnssFile); }
+        try {
+                data = readGNSSFaulty(gnssFile, 0.0, 20.0, percentFaulty);
+        }
         catch(std::exception& e)
         {
                 cout << red << "\n\n Cannot read GNSS data file " << endl;

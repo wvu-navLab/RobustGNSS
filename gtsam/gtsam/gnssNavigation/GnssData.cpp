@@ -40,6 +40,47 @@ vector<rnxData> readGNSS(const std::string &fileLoc) {
         return data;
 }
 
+vector<rnxData> readGNSSFaulty(const std::string &fileLoc, const double &mean, const double &stdDev, const double &percentFaulty) {
+        /*
+           inputs ::
+           fileLoc ---> path to data file
+           mean --> mean of distribution to generate observation faults
+           stdDev --> 1 sigma of observation fault distribution
+           percentFaulty --> number of faults to add to data set. scale == [0,1]
+           output ::
+           data ---> gnss data in gtsam format
+                           { epoch, svn, satXYZ, computed_range, rangeLC, phaseLC }
+         */
+        vector<rnxData> data;
+        string data_file = findExampleDataFile(fileLoc);
+        ifstream is(data_file.c_str());
+
+        std::default_random_engine generator;
+        std::normal_distribution<double> distribution(mean, stdDev);
+
+        srand( (unsigned)time( NULL ) );
+
+        int svn, count, numFault=0;
+        double break_flag, grav_delay, windup, satPC, trop_slant, c1Del, c2Del;
+        double week, sow, satX, satY, satZ, rho, cb, rel, rangeLC, phaseLC;
+        Point3 satXYZ, computed_range;
+        string constellation;
+        while (is) {
+                is >> week >> sow  >> count >> constellation
+                >> svn >> rangeLC >> phaseLC
+                >> rho >> cb >> rel >> grav_delay >> trop_slant >>  windup >> satPC >> satX >> satY >> satZ >> break_flag >> c1Del >> c2Del;
+                if ( ((float) rand()/RAND_MAX) < percentFaulty) {
+                        rho += distribution(generator);
+                        numFault++;
+                }
+                data.push_back(rnxData(sow, count, svn,Point3(satX,satY,satZ),
+                                       (rho - cb  + rel  + grav_delay + trop_slant - satPC), (rangeLC - c1Del + c2Del), (phaseLC - windup*0.017), break_flag));
+                // 0.01702215881 == LC wavelength/2*pi
+        }
+        is.clear();         /* clears the end-of-file and error flags */
+        return data;
+}
+
 void writeStates(Values &results, string outputFile){
         /*
            inputs ::

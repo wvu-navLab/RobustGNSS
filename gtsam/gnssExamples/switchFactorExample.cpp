@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
         int currKey=-1, trop=1, startEpoch=0, satKeyPrev=-1, sc=1, nThreads, startKey;
         int num_gps_factors=0, factorCount=0, lastStep, firstStep, initIter;
         double measWeight, switchInit, switchPrior;
-        double residualThresh, processScale(1.0), timeStep(0.1), prevTime;
+        double residualThresh, processScale(1.0), timeStep(0.1), prevTime, percentFaulty;
         string gnssFile, insFile, outputFile, residualTxtInit="initResidaul.txt";
         string residualTxtOut="finalResidual.txt",textExtension=".txt", strategy;
         string switchExtension = "Switch.txt", graphExtension=".dot", dir;
@@ -115,6 +115,8 @@ int main(int argc, char** argv) {
                 ("residualThresh,res", po::value<double>(&residualThresh)->default_value(15.0), "Residual threshold to mark outliers")
                 ("switchInit", po::value<double>(&switchInit)->default_value(1.0),
                 "Inital switchable constraint value")
+                ("percentFaulty", po::value<double>(&percentFaulty)->default_value(0.0),
+                "Percentage of observations to add faults. (scale [0,1])")
                 ("switchPrior", po::value<double>(&switchPrior)->default_value(0.1),
                 "Initial Uncertainty in the switchable constraint")
                 ("measWeight", po::value<double>(&measWeight)->default_value(3.0),
@@ -186,7 +188,9 @@ int main(int argc, char** argv) {
 
         SharedNoiseModel switchPriorModel = noiseModel::Diagonal::Sigmas( (Vector(1) << switchPrior ).finished() );
         // Read GNSS data
-        try { data = readGNSS(gnssFile); }
+        try { // data = readGNSS(gnssFile);
+                data = readGNSSFaulty(gnssFile, 0.0, 20.0, percentFaulty);
+        }
         catch(std::exception& e)
         {
                 cout << red << "\n\n Cannot read GNSS data file " << endl;
