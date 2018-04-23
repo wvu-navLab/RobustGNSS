@@ -7,20 +7,21 @@
 #include "PseudorangeSwitchFactor.h"
 
 using namespace std;
-using namespace vertigo; 
+using namespace vertigo;
 
 namespace gtsam {
 
 //***************************************************************************
-  Vector PseudorangeSwitchFactor::evaluateError(const gnssStateVec& q,
-				   const SwitchVariableLinear& s,
-                                   boost::optional<Matrix&> H1,
-				   boost::optional<Matrix&> H2) const {
+Vector PseudorangeSwitchFactor::evaluateError(const nonBiasStates& q,
+                                              const SwitchVariableLinear& s,
+                                              boost::optional<Matrix&> H1,
+                                              boost::optional<Matrix&> H2) const {
 
-    double error = (h_.transpose()*q)-measured_;
-    error *= s.value();
-    if (H1) { (*H1) = (Matrix(1,5) << h_.transpose() * s.value() ).finished(); }
-    if (H2) { (*H2) = (Vector(1) << error).finished(); }
-    return (Vector(1) << error).finished();
-  }
+        Vector h_ = obsMap(satXYZ_, nomXYZ_, 1);
+        double error = (h_.transpose()*q)-measured_;
+        error *= s.value();
+        if (H1) { (*H1) = (Matrix(1,5) << h_.transpose() * s.value() ).finished(); }
+        if (H2) { (*H2) = (Vector(1) << error).finished(); }
+        return (Vector(1) << error).finished();
+}
 } // namespace

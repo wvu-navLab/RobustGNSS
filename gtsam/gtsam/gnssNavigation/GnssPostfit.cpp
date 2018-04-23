@@ -33,6 +33,7 @@ vector<double> getResiduals( Point3& nomXYZ, Values &results, vector<rnxData> da
                 }
                 epochKey++;
         }
+        postFit.erase(postFit.end() - 1);
         return postFit;
 }
 

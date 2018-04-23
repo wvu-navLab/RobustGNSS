@@ -1,5 +1,5 @@
 /**
- *  @file   pppGraph.cpp
+ *  @file   l2Example.cpp
  *  @author Ryan Watson & Jason Gross
  *  @brief  Factor graph to process GNSS data. This example only handles pseudorange
 
@@ -102,15 +102,15 @@ int main(int argc, char** argv) {
                 "First step to process from the dataset file")
                 ("lastStep,l", po::value<int>(&lastStep)->default_value(-1),
                 "Last step to process, or -1 to process until the end of the dataset")
-                ("threads", po::value<int>(&nThreads)->default_value(-1),
+                ("threads", po::value<int>(&nThreads)->default_value(4),
                 "Number of threads, or -1 to use all processors")
                 ("noTrop", "Will turn residual troposphere estimation off. Troposphere will still be modeled.")
-                ("initIter",po::value<int>(&initIter)->default_value(100),
+                ("initIter",po::value<int>(&initIter)->default_value(10),
                 "Number of iterations before initial postfit data edit")
                 ("dir", po::value<string>(&dir)->default_value(""),
                 "Total path to store generated data")
                 ("elWeight,el", "Elevation angle dependant measuremnt weighting")
-                ("measWeight", po::value<double>(&measWeight)->default_value(15.0),
+                ("measWeight", po::value<double>(&measWeight)->default_value(3.0),
                 "Noise applied to each GNSS observable")
                 ("writeGraph",
                 "Write graph to text file. Do not write large graphs (i.e. Nodes>=100)")
@@ -163,7 +163,7 @@ int main(int argc, char** argv) {
         Point3 nomXYZ(856295.3346, -4843033.4111, 4048017.6649);
 
         double output_time = 0.0;
-        double rangeWeight = pow(3,2);
+        double rangeWeight = pow(measWeight,2);
 
         nonBiasStates initEst((gtsam::Vector(5) << 0,0,0,0,0).finished());
 
@@ -198,7 +198,7 @@ int main(int argc, char** argv) {
         if ( lastStep < 0 ) { lastStep = get<0>(data.back()); }
 
         // Construct Graph --- Only Pseudorange factors
-        for(unsigned int i = startEpoch; i < data.size(); i++ ) {
+        for(unsigned int i = startEpoch; i < data.size()-1; i++ ) {
 
                 // Get the current epoch's observables
                 double gnssTime = get<0>(data[i]);
@@ -235,7 +235,7 @@ int main(int argc, char** argv) {
 
         // Optimize the graph
         LevenbergMarquardtParams params;
-        params.maxIterations = 50;
+        params.maxIterations = initIter;
         Values result = LevenbergMarquardtOptimizer(graph, initial_values, params).optimize();
 
         try {
