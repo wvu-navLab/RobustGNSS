@@ -1,7 +1,6 @@
 # RobustGNSS
 
-This repository contains a modified version of [GTSAM](https://bitbucket.org/gtborg/gtsam), which has been modified for GNSS data processing. A detailed description of the modification made can be found in ["Robust Navigation In GNSS Degraded
-Environment Using Graph Optimization"](https://www.researchgate.net/profile/Ryan_Watson7/publication/320084321_Robust_Navigation_in_GNSS_Degraded_Environment_Using_Graph_Optimization/links/59cd10ef0f7e9b6e147906ec/Robust-Navigation-in-GNSS-Degraded-Environment-Using-Graph-Optimization.pdf). This software has been cleared for public release by the USAF Case # 88ABW-2017-3893
+This repository contains a modified version of [GTSAM](https://bitbucket.org/gtborg/gtsam), which has been updated for GNSS signal processing. To enable RINEX file reading and GNSS observation modeling, the [GPSTk](http://www.gpstk.org/bin/view/Documentation/WebHome) library is utilized. A detailed description of the modification can be found in ["Robust Navigation In GNSS Degraded Environment Using Graph Optimization"](https://www.researchgate.net/profile/Ryan_Watson7/publication/320084321_Robust_Navigation_in_GNSS_Degraded_Environment_Using_Graph_Optimization/links/59cd10ef0f7e9b6e147906ec/Robust-Navigation-in-GNSS-Degraded-Environment-Using-Graph-Optimization.pdf). This software has been cleared for public release by the USAF Case # 88ABW-2017-3893
 
 
 ## How to Install 
@@ -70,5 +69,3 @@ For a complete list of available options, run the command provided below.
 ````
 ./gnssExamples/l2Example -h 
 ````
-
-
