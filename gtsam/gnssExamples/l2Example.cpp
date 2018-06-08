@@ -26,14 +26,12 @@
 #include <gtsam/slam/PriorFactor.h>
 #include <gtsam/slam/BetweenFactor.h>
 #include <gtsam/nonlinear/Marginals.h>
-#include <gtsam/insNavigation/InsData.h>
 #include <gtsam/gnssNavigation/GnssData.h>
 #include <gtsam/gnssNavigation/GnssTools.h>
 #include <gtsam/nonlinear/DoglegOptimizer.h>
 #include <gtsam/nonlinear/NonlinearFactor.h>
 #include <gtsam/gnssNavigation/FolderUtils.h>
 #include <gtsam/gnssNavigation/GnssPostfit.h>
-#include <gtsam/gnssNavigation/gnssStateVec.h>
 #include <gtsam/gnssNavigation/nonBiasStates.h>
 #include <gtsam/nonlinear/NonlinearFactorGraph.h>
 #include <gtsam/nonlinear/GaussNewtonOptimizer.h>
@@ -75,12 +73,11 @@ int main(int argc, char** argv) {
         int currKey=-1, trop=1, startEpoch=0, satKeyPrev=-1, sc=1, nThreads, startKey;
         int num_gps_factors=0, factorCount=0, lastStep, firstStep, initIter;
         double measWeight, percentFaulty;
-        string gnssFile, insFile, outputFile, residualTxtInit="initResidaul.txt";
+        string gnssFile, outputFile, residualTxtInit="initResidaul.txt";
         string residualTxtOut="finalResidual.txt",textExtension=".txt", strategy;
         string switchExtension = "Switch.txt", graphExtension=".dot", dir;
         vector<string> satIndexLiteral;
         vector<rnxData> data;
-        vector<insData> insData;
         vector<int> numFactors;
 
         cout.precision(10);
