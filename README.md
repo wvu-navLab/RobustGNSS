@@ -4,7 +4,21 @@ This repository contains a modified version of [GTSAM](https://bitbucket.org/gtb
 
 For information on incorporating carrier-phase observations, please see ["Evaluation of Kinematic Precise Point Positioning Convergence with an Incremental Graph Optimizer"](https://www.researchgate.net/publication/324454778_Evaluation_of_Kinematic_Precise_Point_Positioning_Convergence_with_an_Incremental_Graph_Optimizer). The software released with this paper can be found here: [https://github.com/wvu-navLab/PPP-BayesTree](https://github.com/wvu-navLab/PPP-BayesTree).
 
+<br/>
+<br/>
 
+If you utilize this software for an academic purpose, please consider using the following citation:
+```
+@article{watson2018robust,
+        title={Robust navigation in GNSS degraded environment using graph optimization},
+        author={Watson, Ryan M and Gross, Jason N},
+        journal={arXiv preprint arXiv:1806.08899},
+        year={2018}
+}
+```
+
+<br/>
+<br/>
 ## How to Install 
 
 
